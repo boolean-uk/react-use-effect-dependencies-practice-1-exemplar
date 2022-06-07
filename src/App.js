@@ -8,10 +8,19 @@ export default function App() {
 
   const [data, setData] = useState(null);
 
-  console.log({ data });
+  const getData = async () => {
+      const response = await fetch(`https://swapi.dev/api/${dataType}`)
+      const json = await response.json()
+
+      if ('results' in json) {
+        setData(json)
+      }
+  }
 
   // Write code here.
-  //
+  useEffect(() => {
+    getData()
+  }, [dataType])
 
   return (
     <div>
